@@ -1,5 +1,7 @@
 import './App.css';
 import { useState } from 'react';
+import { evaluate } from 'mathjs';
+import Swal from 'sweetalert2';
 import Boton from './componentes/boton/Boton';
 import Pantalla from './componentes/pantalla/Pantalla';
 import BotonClear from './componentes/botonClear/BotonClear';
@@ -11,6 +13,10 @@ function App() {
   const agregarInput = (val) => {
     setInput(input + val)
   };
+
+  const calcularResultado = () => {
+    input ? setInput(evaluate(input)) : Swal.fire('Por favor ingresa un valor para poder calcular el resultado');
+  }
 
   return (
     <div className="App">
@@ -35,7 +41,7 @@ function App() {
           <Boton manejarClick={agregarInput}>*</Boton>
         </div>
         <div className='fila'>
-          <Boton manejarClick={agregarInput}>=</Boton>
+          <Boton manejarClick={calcularResultado}>=</Boton>
           <Boton manejarClick={agregarInput}>0</Boton>
           <Boton manejarClick={agregarInput}>.</Boton>
           <Boton manejarClick={agregarInput}>/</Boton>
